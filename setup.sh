@@ -41,7 +41,9 @@ cd ..
 
 
 
-echo 'Done, you can now run docker-compose up juiceshop. And you can use the asm/threat-cli to test various kind of threats'
+echo 'Done, you can now run docker-compose up juiceshop.'
+echo "docker-compose up juiceshop"
+echo 'And you can use the asm/threat-cli to test various kind of threats'
 echo "Examples:"
-echo "docker run --rm -t asm/threat-cli list"
-echo "docker run --rm -t asm/threat-cli run -a 1"
+echo "docker run --rm -t --network asm-threat-emulation-network asm/threat-cli list"
+echo "docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 1"

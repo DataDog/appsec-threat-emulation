@@ -3,25 +3,32 @@ TBD
 
 
 
-# Setup
+## Setup
 
 1. Create a Datadog API Key (Follow this instruction to get or create your API key)
 
 
-2. Add the key to environment variable
+2. run the setup script
+> setup script is a bash script to build the docker images and setup the required environment variables
 
 ```
-cp .env.example .env
+./setup.sh
 ```
 
-Then open `.env` file and add your datadog API Key
 
-```env
-DD_API_KEY="<Datadog API Key>"
-```
 
-3. Run the docker compose
+## Emulate threats
+
+1. Run the vulnerable docker containers
 
 ```
 docker-compose up juiceshop
 ```
+
+2. Run the simulation tool
+
+```
+docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 1
+```
+
+
