@@ -5,7 +5,11 @@ TBD
 
 ## Setup
 
-1. Create a Datadog API Key (Follow this instruction to get or create your API key)
+1. Clone the repository with the included sub-module
+
+```
+git clone --recurse-submodules git@github.com:DataDog/asm-threat-emulation.git
+```
 
 
 2. run the setup script
