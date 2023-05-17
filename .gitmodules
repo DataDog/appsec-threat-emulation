@@ -1,0 +1,3 @@
+[submodule "apps/juice-shop"]
+	path = apps/Juiceshop/juice-shop
+	url = https://github.com/DataDog/juice-shop.git

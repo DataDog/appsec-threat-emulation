@@ -1,6 +1,4 @@
 untracked
-node_modules
-jest-report/node_modules
-coverage
 docker
+.env
 # jest-report

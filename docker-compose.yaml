@@ -1,0 +1,57 @@
+version: "3.9"
+services:
+  agent:
+    image: datadog/agent:latest
+    ports:
+      - "8126:8126"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    environment:
+      - DD_APM_ENABLED=true
+      - DD_APM_NON_LOCAL_TRAFFIC=true
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_SITE=${DD_SITE:-datadoghq.com}
+      - DD_ENV=asm-coverage
+    
+  juiceshop:
+    build:
+      context: apps/Juiceshop
+      dockerfile: Dockerfile
+    environment:
+      - DD_AGENT_HOST=agent
+      - DD_TRACE_AGENT_PORT=8126
+      - DD_TRACER_ENABLED=true
+      - DD_APPSEC_ENABLED=true
+      - DD_SERVICE=${DD_SERVICE:-asm}
+      - DD_TRACE_DEBUG=true
+      - DD_ENV=asm-coverage
+    depends_on:
+      db:
+        condition: service_healthy
+      agent:
+        condition: service_healthy
+    ports:
+       - 8081:3000
+
+  db:
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wingsuit
+      MYSQL_DATABASE: juiceshop
+      MYSQL_USER: juiceshop
+      MYSQL_PASSWORD: juiceshop-pwd
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 2s
+      retries: 10
+
+
+networks:
+  default:
+    name: asm-threat-emulation-network

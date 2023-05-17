@@ -20,7 +20,9 @@ const http = (bearer) => {
                     headers: { 'User-Agent': id, 'Cookie': "token=" + bearer, 'Authorization': "Bearer " + bearer },
                     withCredentials: true
                 }) 
-            } catch (error) { return error }    
+            } catch (error) { 
+                return error 
+            }    
             return res;
         },
         post: async (url, data, contentType = 'application/json') => {

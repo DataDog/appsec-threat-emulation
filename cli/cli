@@ -21,11 +21,15 @@ program.command('list')
 
 program.command('run')
     .description('Run all attacks or specific attack')
-    .argument('[attackID]', 'run specific attack')
-    .option('--all', 'run all attacks')
-    .option('--target', 'the target url, default is http://localhost:8081')
-    .action((str, options) => {
-        attacks.run(str, options.target)
+    // .argument('[attackID]', 'run specific attack')
+    .requiredOption('-a, --attack <attack_id>', 'Attack ID you want to detonate, Use all to run all attacks')
+    // .option('--target', 'the target url, default is http://localhost:8081')
+    .option('-t, --target <type>', 'the target url, default is configured to use docker hosts http://juiceshop/')
+    .action((options) => {
+        // if(options.attack == 'all'){
+        //     return attacks.runAll(options.target);
+        // }
+        attacks.run(options.attack, options.target)
     });
 
 program.parse();

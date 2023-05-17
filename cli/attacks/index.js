@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const sqli = require('./sqli');
-let baseUrl = "http://localhost:8081"
+let baseUrl = "http://juiceshop:3000"
 
 const attackList = [
     {id: 1, description: "Basic SQL injection attack on " + "a [ non-vulnearble ]" + " endpoint", attackFunc: sqli.basic1},
