@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+const { Command } = require('commander');
+const Table = require('cli-table');
+const program = new Command();
+
+const attacks = require('./attacks');
+
+program
+  .name('threat-emulation')
+  .description('ASM threat emulation tool')
+  .version('0.0.1');
+//program.version('0.0.1', '-v, --vers', 'output the current version');
+
+
+program.command('list')
+    .description('List of the attacks')
+    .action((str, options) => {
+        console.log(getAttackList())
+    });
+
+
+program.command('run')
+    .description('Run all attacks or specific attack')
+    .argument('[attackID]', 'run specific attack')
+    .option('--all', 'run all attacks')
+    .option('--target', 'the target url, default is http://localhost:8081')
+    .action((str, options) => {
+        attacks.run(str, options.target)
+    });
+
+program.parse();
+
+
+
+function getAttackList(){
+   
+    var table = new Table();
+    
+    // instantiate
+    var table = new Table({
+        head: ['ID', 'Attack name']
+    });
+    let attackList = attacks.getList();
+    for (const attack of attackList) {
+        table.push([attack.id, attack.description]);
+    }
+    
+    return table.toString();
+}
+

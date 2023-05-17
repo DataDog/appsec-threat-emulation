@@ -1,0 +1,6 @@
+untracked
+node_modules
+jest-report/node_modules
+coverage
+docker
+# jest-report
