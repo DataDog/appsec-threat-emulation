@@ -42,7 +42,7 @@ docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 
 1. List the available attacks
 
 ```
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 1
+docker run --rm -t --network asm-threat-emulation-network asm/threat-cli list
 ```
 
 result
