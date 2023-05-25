@@ -1,12 +1,18 @@
 const chalk = require('chalk');
 const sqli = require('./sqli');
+const auth = require('./auth');
+const ssrf = require('./ssrf');
+
 let baseUrl = "http://juiceshop:3000"
 
 const attackList = [
-    {id: 1, description: "Basic SQL injection attack on " + "a [ non-vulnearble ]" + " endpoint", attackFunc: sqli.basic1},
-    {id: 2, description: "SQL injection attack on " + "a [ vulnearble ]" + " endpoint", attackFunc: sqli.exploit },
-    // {id: 3, description: "Basic SSRF attack on " + bold("a non-vulnearble") + " endpoint", attackFunc: ()=> console.log('ssrf 1')},
-    // {id: 4, description: "Basic SSRF attack on " + bold("a Vulnearble") + " endpoint",  attackFunc: ()=> console.log('ssrf 2')},
+    {id: 1, description: "SQL injection attacks on a " + bold("a non-vulnearble") + " endpoint", attackFunc: sqli.basic1},
+    {id: 2, description: "Successful SQL injection attack on a " + bold("a Vulnearble") + " endpoint", attackFunc: sqli.exploit },
+
+    {id: 3, description: "SSRF attacks on " + bold("a non-vulnearble") + " endpoint", attackFunc: ssrf.basic1},
+    {id: 4, description: "Successful SSRF attack on " + bold("a Vulnearble") + " endpoint",  attackFunc: ssrf.exploit},
+
+    {id: 5, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing}
 ];
 
 module.exports = {

@@ -10,7 +10,6 @@ async function basic1(targetURL){
 
     const spinner = ora('Running basic unsuccessful sql injection attack').start();
 
-    await new Promise(r => setTimeout(r, 1000));
     let sql_payloads = fs.readFileSync(__dirname + '/sqli-payloads.txt', {encoding:'utf8'});
         sql_payloads = sql_payloads.split("\n");
 
@@ -21,7 +20,7 @@ async function basic1(targetURL){
             "q": payload
             
         })
-        await new Promise(r => setTimeout(r, 200));
+        await new Promise(r => setTimeout(r, 100));
     }
 
     spinner.stopAndPersist({
@@ -42,7 +41,7 @@ async function exploit(targetURL){
         "q": payload
         
     })
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 1000));
     spinner.stopAndPersist({
         symbol: logSymbols.success,
         text: 'Successful SQL injection attack - done',
