@@ -59,7 +59,7 @@ The application should be accessible via this url `http://localhost:8081`
 
 ## Usage
 
-Once the Threat Emulation Project is running and accessible through your web browser, you can start emulating attacks on the Juice Shop web application. You can do it with our CLI or Manually
+Once the Threat Emulation Project is running and accessible through your web browser, you can start emulating attacks on the Juice Shop web application.
 
 
 ### Using CLI
@@ -76,15 +76,19 @@ result
 ┌────┬────────────────────────────────────────────────────────────┐
 │ ID │ Attack name                                                │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 1  │ SQL injection attacks on a a non-vulnearble endpoint       │
+│ 1  │ Generic security scan                                      │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 2  │ Successful SQL injection attack on a a Vulnearble endpoint │
+│ 2  │ Security scan using known attack tools                     │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 3  │ SSRF attacks on a non-vulnearble endpoint                  │
+│ 10 │ SQL injection attacks on a a non-vulnearble endpoint       │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 4  │ Successful SSRF attack on a Vulnearble endpoint            │
+│ 20 │ Successful SQL injection attack on a a Vulnearble endpoint │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 5  │ Credential stuffing attack                                 │
+│ 30 │ SSRF attacks on a non-vulnearble endpoint                  │
+├────┼────────────────────────────────────────────────────────────┤
+│ 40 │ Successful SSRF attack on a Vulnearble endpoint            │
+├────┼────────────────────────────────────────────────────────────┤
+│ 50 │ Credential stuffing attack                                 │
 └────┴────────────────────────────────────────────────────────────┘
 ```
 
@@ -107,9 +111,6 @@ Target URL:  http://juiceshop:3000
 ⠸ Basic SQL Injection: 1) or sleep(__TIME__)#
 ```
 
-### Manually
-You can still run the attacks manually by ..........
-
 ## Supported Attacks
 
 The Threat Emulation Project supports a wide range of attacks commonly found in web application security assessments. Some of the supported attacks include:
@@ -128,78 +129,3 @@ At the time, the repository is not accepting contributions. However, if you'd li
 ## License
 
 TBD
-
-
-
-
-
-# Application Security Threat Emulation 
-Application Security Threat Emulation project is aim for emulate popular threats against 
-
-
-
-## Setup
-
-1. Clone the repository with the included sub-module
-
-```
-git clone --recurse-submodules git@github.com:DataDog/asm-threat-emulation.git
-```
-
-
-2. run the setup script
-> setup script is a bash script to build the docker images and setup the required environment variables
-
-```
-./setup.sh
-```
-
-
-
-## Run
-
-1. Run the vulnerable docker containers
-
-```
-docker-compose up juiceshop
-```
-
-2. Run the simulation tool
-
-```
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 1
-```
-
-
-
-## Threat emulation
-
-1. List the available attacks
-
-```
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli list
-```
-
-result
-```
-┌────┬─────────────────────────────────────────────────────────────┐
-│ ID │ Attack name                                                 │
-├────┼─────────────────────────────────────────────────────────────┤
-│ 1  │ Basic SQL injection attack on a [ non-vulnearble ] endpoint │
-├────┼─────────────────────────────────────────────────────────────┤
-│ 2  │ SQL injection attack on a [ vulnearble ] endpoint           │
-└────┴─────────────────────────────────────────────────────────────┘
-```
-
-2. running attack
-
-```
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 1
-```
-
-result
-```
-Running attack #1:  Basic SQL injection attack on a [ non-vulnearble ] endpoint
-Target URL:  http://juiceshop:3000
-⠸ Basic SQL Injection: 1) or sleep(__TIME__)#
-```
