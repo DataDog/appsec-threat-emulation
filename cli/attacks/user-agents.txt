@@ -1,0 +1,7 @@
+Arachni/v1.6.0
+dirbuster
+Nikto/2.1.6
+w3af
+Mozilla/1.2 zgrab
+Fuzz Faster U Fool
+sqlmap/1.7

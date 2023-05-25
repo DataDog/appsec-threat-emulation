@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const scanners = require('./scanners');
 const sqli = require('./sqli');
 const auth = require('./auth');
 const ssrf = require('./ssrf');
@@ -6,13 +7,17 @@ const ssrf = require('./ssrf');
 let baseUrl = "http://juiceshop:3000"
 
 const attackList = [
-    {id: 1, description: "SQL injection attacks on a " + bold("a non-vulnearble") + " endpoint", attackFunc: sqli.basic1},
-    {id: 2, description: "Successful SQL injection attack on a " + bold("a Vulnearble") + " endpoint", attackFunc: sqli.exploit },
 
-    {id: 3, description: "SSRF attacks on " + bold("a non-vulnearble") + " endpoint", attackFunc: ssrf.basic1},
-    {id: 4, description: "Successful SSRF attack on " + bold("a Vulnearble") + " endpoint",  attackFunc: ssrf.exploit},
+    {id: 1, description: "Generic security scan", attackFunc: scanners.generic},
+    {id: 2, description: "Security scan using known attack tools", attackFunc: scanners.attack_tools},
 
-    {id: 5, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing}
+    {id: 10, description: "SQL injection attacks on a " + bold("a non-vulnearble") + " endpoint", attackFunc: sqli.basic1},
+    {id: 20, description: "Successful SQL injection attack on a " + bold("a Vulnearble") + " endpoint", attackFunc: sqli.exploit },
+
+    {id: 30, description: "SSRF attacks on " + bold("a non-vulnearble") + " endpoint", attackFunc: ssrf.basic1},
+    {id: 40, description: "Successful SSRF attack on " + bold("a Vulnearble") + " endpoint",  attackFunc: ssrf.exploit},
+
+    {id: 50, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing}
 ];
 
 module.exports = {

