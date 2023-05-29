@@ -1,6 +1,6 @@
 # Generic security scanning
 
-## overview
+## Overview
 Security scanning is consider one of the major steps in any hackers methdology to attempt to find vulnerabilities by launching a lot of payloads into the target hoping for something trigger.
 
 

@@ -2,7 +2,7 @@
 
 ## Overview
 This attack is simulating a SSRF attack in two scenarios. 
-The first scenario is [an attack on a non-vulnerable endpoint]() while the second one is [a successful exploit on a vulnerable endpoint]().
+The first scenario is [an attack on a non-vulnerable endpoint](#1-ssrf-attacks-on-a-non-vulnerable-endpoint) while the second one is [a successful exploit on a vulnerable endpoint](#2-ssrf-attacks-on-a-vulnerable-endpoint).
 
 
 ```
