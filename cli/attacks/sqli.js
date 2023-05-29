@@ -10,7 +10,7 @@ async function basic1(targetURL){
 
     const spinner = ora('Running basic unsuccessful sql injection attack').start();
 
-    let sql_payloads = fs.readFileSync(__dirname + '/1.txt', {encoding:'utf8'});
+    let sql_payloads = fs.readFileSync(__dirname + '/sqli-payloads.txt', {encoding:'utf8'});
         sql_payloads = sql_payloads.split("\n");
 
     
