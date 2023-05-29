@@ -2,13 +2,7 @@
 
 ## overview
 This attack is simulating a SQL injection attack in two scenarios. 
-The first scenario is [an attack on a non-vulnerable endpoint](#sql-injection-attacks-on-a-non-vulnerable-endpoint) while the second one is [a successful exploit on a vulnerable endpoint](#sql-injection-attacks-on-a-vulnerable-endpoint).
-
-
-
-
-## Run the attack
-You can run the attacks using our cli tool
+The first scenario is [an attack on a non-vulnerable endpoint](#1-sql-injection-attacks-on-a-non-vulnerable-endpoint) while the second one is [a successful exploit on a vulnerable endpoint](#2-sql-injection-attacks-on-a-vulnerable-endpoint).
 
 
 ```
@@ -19,7 +13,13 @@ You can run the attacks using our cli tool
 ├────┼────────────────────────────────────────────────────────────┤
 ```
 
-### 1. SQL injection attacks on a Non-Vulnerable endpoint
+## Run the attack
+You can run the attacks using our cli tool
+
+
+
+
+## 1. SQL injection attacks on a Non-Vulnerable endpoint
 
 ```shell
 docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 3
@@ -59,7 +59,7 @@ A SQL injection signal will be generated with severity medium. You can view the 
 
 
 
-### 2. SQL injection attacks on a Vulnerable endpoint
+## 2. SQL injection attacks on a Vulnerable endpoint
 
 ```shell
 docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 4
