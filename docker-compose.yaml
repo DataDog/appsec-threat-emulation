@@ -13,7 +13,7 @@ services:
       - DD_APM_NON_LOCAL_TRAFFIC=true
       - DD_API_KEY=${DD_API_KEY}
       - DD_SITE=${DD_SITE:-datadoghq.com}
-      - DD_ENV=asm-coverage
+      - DD_ENV=threat-emulation-local
     
   juiceshop:
     build:
@@ -26,7 +26,6 @@ services:
       - DD_APPSEC_ENABLED=true
       - DD_SERVICE=${DD_SERVICE:-asm}
       - DD_TRACE_DEBUG=true
-      - DD_ENV=asm-coverage
     depends_on:
       db:
         condition: service_healthy
@@ -50,7 +49,6 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 2s
       retries: 10
-
 
 networks:
   default:

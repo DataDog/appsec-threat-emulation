@@ -10,14 +10,11 @@ const attackList = [
 
     {id: 1, description: "Generic security scan", attackFunc: scanners.generic},
     {id: 2, description: "Security scan using known attack tools", attackFunc: scanners.attack_tools},
-
-    {id: 10, description: "SQL injection attacks on a " + bold("a non-vulnearble") + " endpoint", attackFunc: sqli.basic1},
-    {id: 20, description: "Successful SQL injection attack on a " + bold("a Vulnearble") + " endpoint", attackFunc: sqli.exploit },
-
-    {id: 30, description: "SSRF attacks on " + bold("a non-vulnearble") + " endpoint", attackFunc: ssrf.basic1},
-    {id: 40, description: "Successful SSRF attack on " + bold("a Vulnearble") + " endpoint",  attackFunc: ssrf.exploit},
-
-    {id: 50, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing}
+    {id: 3, description: "SQL injection attacks on a " + bold("a Non-Vulnerable") + " endpoint", attackFunc: sqli.basic1},
+    {id: 4, description: "Successful SQL injection attack on a " + bold("a Vulnerable") + " endpoint", attackFunc: sqli.exploit },
+    {id: 5, description: "SSRF attacks on " + bold("a Non-Vulnerable") + " endpoint", attackFunc: ssrf.basic1},
+    {id: 6, description: "Successful SSRF attack on " + bold("a Vulnerable") + " endpoint",  attackFunc: ssrf.exploit},
+    {id: 7, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing}
 ];
 
 module.exports = {

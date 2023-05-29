@@ -38,13 +38,11 @@ async function attack_tools(targetURL){
     let userAgents = fs.readFileSync(__dirname + '/user-agents.txt', {encoding:'utf8'});
     userAgents = userAgents.split("\n");
 
+    let payloads = fs.readFileSync(__dirname + '/generic-payloads.txt', {encoding:'utf8'});
+    payloads = payloads.split("\n");
+
     for (const userAgent of userAgents) {
         
-       
-        let payloads = fs.readFileSync(__dirname + '/generic-payloads.txt', {encoding:'utf8'});
-        payloads = payloads.split("\n");
-
-
         for (const payload of payloads) {
 
             spinner.text = 'Basic security scan with tool: ' + userAgent + ' payload: ' + payload;

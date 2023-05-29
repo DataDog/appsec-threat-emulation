@@ -10,17 +10,17 @@ async function basic1(targetURL){
 
     const spinner = ora('Running basic unsuccessful sql injection attack').start();
 
-    let sql_payloads = fs.readFileSync(__dirname + '/sqli-payloads.txt', {encoding:'utf8'});
+    let sql_payloads = fs.readFileSync(__dirname + '/1.txt', {encoding:'utf8'});
         sql_payloads = sql_payloads.split("\n");
 
     
     for (const payload of sql_payloads) {
         spinner.text = 'Basic SQL Injection: ' + payload;
-        await http().get(targetURL + '/rest/',{
+        await http().get(targetURL + '/api/Quantitys/',{
             "q": payload
             
         })
-        await new Promise(r => setTimeout(r, 100));
+        await new Promise(r => setTimeout(r, 200));
     }
 
     spinner.stopAndPersist({
