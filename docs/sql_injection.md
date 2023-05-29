@@ -59,10 +59,10 @@ A SQL injection signal will be generated with severity medium. You can view the 
 ### SQL injection attacks on a **Vulnerable** endpoint
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 3
+docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 4
 ```
 
-This command will run the cli inside the docker container. and the CLI will launch some attacks from this [file](./../cli/attacks/sqli-payloads.txt) on a non-vulnerable endpoint
+This time the attack will execute a working exploit on a vulnerable endpoint. So this is simulate a successful exploitation of a vulnerability
 
 
 
