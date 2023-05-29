@@ -13,11 +13,6 @@ The first scenario is [an attack on a non-vulnerable endpoint](#1-sql-injection-
 ├────┼────────────────────────────────────────────────────────────┤
 ```
 
-## Run the attack
-You can run the attacks using our cli tool
-
-
-
 
 ## 1. SQL injection attacks on a Non-Vulnerable endpoint
 
@@ -49,7 +44,7 @@ You can view the security traces by navigating to [ASM trace](https://app.datado
 
 
 ### SQL Injection Attack Signal
-A SQL injection signal will be generated with severity medium. You can view the security signals by navigating to [ASM trace](https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal)
+A SQL injection signal will be generated with severity medium. You can view the security signals by navigating to [ASM signals](https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal)
 
 
 
@@ -87,9 +82,10 @@ You can view the security traces by navigating to [ASM trace](https://app.datado
 
 ![Security Traces](./imgs/sqli2-traces.png "Security Traces")
 
+The traces here are qualified as `harmful` because ASM detected that this SSRF is exploited successfully
 
 ### SQL Injection Attack Signal
-A SQL injection signal will be generated with severity medium. You can view the security signals by navigating to [ASM trace](https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal)
+A SQL injection signal will be generated with severity critical. You can view the security signals by navigating to [ASM signals](https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal)
 
 
 
