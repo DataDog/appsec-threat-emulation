@@ -5,4 +5,4 @@
 4. [Successful SQL injection attack on a a vulnerable endpoint](./sql_injection.md#2-sql-injection-attacks-on-a-vulnerable-endpoint)
 5. [SSRF attacks on a non-vulnerable endpoint](./server_side_request_forgery.md#1-ssrf-attacks-on-a-non-vulnerable-endpoint)
 6. [Successful SSRF attack on a vulnerable endpoint](./server_side_request_forgery.md#2-ssrf-attacks-on-a-vulnerable-endpoint)
-7. [Credential stuffing attack](./credential_stuffing.md)
+7. [Credential Stuffing attack](./credential_stuffing.md)
