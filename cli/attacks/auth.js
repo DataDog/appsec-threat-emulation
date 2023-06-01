@@ -35,7 +35,7 @@ async function credentialStuffing(targetURL){
                 "password": "notblabla"
             }
         };
-        spinner.text = 'Failed login for email : ' + email;
+        spinner.text = 'Attempting login with email : ' + email;
         await http().custom(config)
         await new Promise(r => setTimeout(r, 100));
     }
