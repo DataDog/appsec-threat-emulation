@@ -128,9 +128,3 @@ At the time, the repository is not accepting contributions. However, if you'd li
 
 TBD
 
-
----- 
-Idea
-
-- give the customer a shell inside the container to exec popular tools like sqlmap or bla bla 
-
