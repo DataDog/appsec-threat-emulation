@@ -8,8 +8,8 @@ let baseUrl = "http://juiceshop:3000"
 
 const attackList = [
 
-    {id: 1, description: "Generic security scan", attackFunc: scanners.generic},
-    {id: 2, description: "Security scan using known attack tools", attackFunc: scanners.attack_tools},
+    {id: 1, description: "Security scan using known attack tools", attackFunc: scanners.attack_tools},
+    {id: 2, description: "Generic security scan", attackFunc: scanners.generic},
     {id: 3, description: "SQL injection attacks on a " + bold("a Non-Vulnerable") + " endpoint", attackFunc: sqli.basic1},
     {id: 4, description: "Successful SQL injection attack on a " + bold("a Vulnerable") + " endpoint", attackFunc: sqli.exploit },
     {id: 5, description: "SSRF attacks on " + bold("a Non-Vulnerable") + " endpoint", attackFunc: ssrf.basic1},
