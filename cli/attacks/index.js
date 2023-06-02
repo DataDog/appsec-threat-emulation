@@ -3,6 +3,7 @@ const scanners = require('./scanners');
 const sqli = require('./sqli');
 const auth = require('./auth');
 const ssrf = require('./ssrf');
+const rate_limit = require('./rate_limiting');
 
 let baseUrl = "http://juiceshop:3000"
 
@@ -15,6 +16,7 @@ const attackList = [
     {id: 5, description: "SSRF attacks on " + bold("a Non-Vulnerable") + " endpoint", attackFunc: ssrf.basic1},
     {id: 6, description: "Successful SSRF attack on " + bold("a Vulnerable") + " endpoint",  attackFunc: ssrf.exploit},
     {id: 7, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing}
+    {id: 8, description: "Spam campaign", attackFunc: rate_limit.spam}
 ];
 
 module.exports = {
