@@ -28,7 +28,7 @@ You can review the login traces by navigating to [ASM trace](https://app.datadog
 
 
 ### Credential Stuffing Signal
-A Credential Stuffing signal will be generated with severity low. If a succesful account takeover happen such as in our case, the signal's severity is upgraded to critical. You can review the security signals by navigating to [ASM trace](https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal)
+A Credential Stuffing signal will be generated with severity low. If a succesful account takeover happen such as in our case, the signal's severity is upgraded to critical. You can review the security signals by navigating to [ASM Signals](https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal)
 
 
 
