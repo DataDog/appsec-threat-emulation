@@ -102,4 +102,4 @@ async function exploit(targetURL){
   
 }
 
-module.exports = { basic1, exploit }
+module.exports = { createAndLogin, basic1, exploit }

@@ -15,7 +15,7 @@ const attackList = [
     {id: 4, description: "Successful SQL injection attack on a " + bold("a Vulnerable") + " endpoint", attackFunc: sqli.exploit },
     {id: 5, description: "SSRF attacks on " + bold("a Non-Vulnerable") + " endpoint", attackFunc: ssrf.basic1},
     {id: 6, description: "Successful SSRF attack on " + bold("a Vulnerable") + " endpoint",  attackFunc: ssrf.exploit},
-    {id: 7, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing}
+    {id: 7, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing},
     {id: 8, description: "Spam campaign", attackFunc: rate_limit.spam}
 ];
 
