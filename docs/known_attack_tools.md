@@ -8,7 +8,7 @@ This attack is simulating attacking with known security tools.
 You can run the attacks using our cli tool.
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 2
+docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 1
 ```
 
 This command will run the CLI inside the docker container. The CLI will launch attacks from this [file](./../cli/attacks/generic-payloads.txt) pretending to come from known security tools.
