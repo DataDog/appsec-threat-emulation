@@ -14,7 +14,7 @@ docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 
 This command will run the CLI inside the docker container. The CLI will launch attacks from this [file](./../cli/attacks/generic-payloads.txt) pretending to come from known security tools.
 
 ```shell
-Running attack #2:  Security scan using known attack tools
+Running attack #1:  Security scan using known attack tools
 Target URL:  http://juiceshop:3000
 ✔ Basic security scan - done
 ```

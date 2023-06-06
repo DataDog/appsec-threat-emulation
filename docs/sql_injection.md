@@ -7,9 +7,9 @@ The first scenario is [an attack on a non-vulnerable endpoint](#1-sql-injection-
 
 ```
 ├────┼────────────────────────────────────────────────────────────┤
-│ 3  │ SQL injection attacks on a a Non-Vulnerable endpoint       │
+│ 4  │ SQL injection attacks on a a Non-Vulnerable endpoint       │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 4  │ Successful SQL injection attack on a a Vulnerable endpoint │
+│ 5  │ Successful SQL injection attack on a a Vulnerable endpoint │
 ├────┼────────────────────────────────────────────────────────────┤
 ```
 
@@ -17,14 +17,14 @@ The first scenario is [an attack on a non-vulnerable endpoint](#1-sql-injection-
 ## 1. SQL injection attacks on a Non-Vulnerable endpoint
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 3
+docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 4
 ```
 
 This command will run the CLI inside the docker container. The CLI will launch attacks from this [file](./../cli/attacks/sqli-payloads.txt) on a non-vulnerable endpoint.  
 Unlike with SSRF, this endpoint does perform SQL queries, but they're not injectable.
 
 ```shell
-Running attack #3:  SQL injection attacks on a a Non-Vulnerable endpoint
+Running attack #4:  SQL injection attacks on a a Non-Vulnerable endpoint
 Target URL:  http://juiceshop:3000
 ✔ Basic SQL injection attack - done
 ```
@@ -46,13 +46,13 @@ A SQL injection signal will be generated with severity medium. You can review th
 ## 2. SQL injection attacks on a Vulnerable endpoint
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 4
+docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 5
 ```
 
 This time the attack will execute a working exploit on a vulnerable endpoint. This simulates a successful exploitation of a real vulnerability.
 
 ```shell
-Running attack #4:  Successful SQL injection attack on a a Vulnerable endpoint
+Running attack #5:  Successful SQL injection attack on a a Vulnerable endpoint
 Target URL:  http://juiceshop:3000
 ✔ Successful SQL injection attack - done
 ```

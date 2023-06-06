@@ -13,7 +13,7 @@ docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 
 This command will run the CLI inside the docker container. The CLI will launch attacks from this [file](./../cli/attacks/fuzzing.txt) on the vulnerable application.
 
 ```shell
-Running attack #1:  Generic security scan
+Running attack #2:  Generic security scan
 Target URL:  http://juiceshop:3000
 ✔ Basic security scan - done
 ```
