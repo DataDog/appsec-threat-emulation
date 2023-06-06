@@ -11,12 +11,13 @@ const attackList = [
 
     {id: 1, description: "Security scan using known attack tools", attackFunc: scanners.attack_tools},
     {id: 2, description: "Generic security scan", attackFunc: scanners.generic},
-    {id: 3, description: "SQL injection attacks on a " + bold("a Non-Vulnerable") + " endpoint", attackFunc: sqli.basic1},
-    {id: 4, description: "Successful SQL injection attack on a " + bold("a Vulnerable") + " endpoint", attackFunc: sqli.exploit },
-    {id: 5, description: "SSRF attacks on " + bold("a Non-Vulnerable") + " endpoint", attackFunc: ssrf.basic1},
-    {id: 6, description: "Successful SSRF attack on " + bold("a Vulnerable") + " endpoint",  attackFunc: ssrf.exploit},
-    {id: 7, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing},
-    {id: 8, description: "Spam campaign", attackFunc: rate_limit.spam}
+    {id: 3, description: "Log4Shell attack on a " + bold("a Non-Vulnerable") + " application", attackFunc: scanners.log4shell},
+    {id: 4, description: "SQL injection attacks on a " + bold("a Non-Vulnerable") + " endpoint", attackFunc: sqli.basic1},
+    {id: 5, description: "Successful SQL injection attack on a " + bold("a Vulnerable") + " endpoint", attackFunc: sqli.exploit },
+    {id: 6, description: "SSRF attacks on " + bold("a Non-Vulnerable") + " endpoint", attackFunc: ssrf.basic1},
+    {id: 7, description: "Successful SSRF attack on " + bold("a Vulnerable") + " endpoint",  attackFunc: ssrf.exploit},
+    {id: 8, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing},
+    {id: 9, description: "Spam campaign", attackFunc: rate_limit.spam}
 ];
 
 module.exports = {

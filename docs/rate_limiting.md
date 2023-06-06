@@ -11,13 +11,13 @@ This rule also require the application to be instrumented [as described here](ht
 Once the signal is enabled, you can run the attacks using our cli tool
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 8
+docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 9
 ```
 
 This command will run the cli inside the docker container. The CLI will send 200 spam comments to the vulnerable application.
 
 ```shell
-Running attack #8:  Spam campaign
+Running attack #9:  Spam campaign
 Target URL:  http://juiceshop:3000
 ✔ Sending spam: 200 spam messages sent
 ```
