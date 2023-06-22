@@ -2,11 +2,6 @@ FROM node:18 as installer
 COPY ./juice-shop /juice-shop
 WORKDIR /juice-shop
 
-# install dd tracer
-RUN sed -i "5iimport './tracer'" ./server.ts
-COPY ./tracer.ts ./tracer.ts
-RUN npm i dd-trace --omit=dev --production
-
 RUN npm i -g typescript ts-node
 RUN npm install --omit=dev --unsafe-perm --production
 RUN npm dedupe
