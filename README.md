@@ -66,7 +66,7 @@ Once the Threat Emulation Project is running and accessible through your web bro
 * List the available attacks
 
 ```
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 1
+docker run --rm -t --network asm-threat-emulation-network asm/threat-cli list
 ```
 
 result
@@ -74,19 +74,23 @@ result
 ┌────┬────────────────────────────────────────────────────────────┐
 │ ID │ Attack name                                                │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 1  │ Generic security scan                                      │
+│ 1  │ Security scan using known attack tools                     │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 2  │ Security scan using known attack tools                     │
+│ 2  │ Generic security scan                                      │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 3  │ SQL injection attacks on a a non-vulnearble endpoint       │
+│ 3  │ Log4Shell attack on a a Non-Vulnerable application         │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 4  │ Successful SQL injection attack on a a Vulnearble endpoint │
+│ 4  │ SQL injection attacks on a a Non-Vulnerable endpoint       │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 5  │ SSRF attacks on a non-vulnearble endpoint                  │
+│ 5  │ Successful SQL injection attack on a a Vulnerable endpoint │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 6  │ Successful SSRF attack on a Vulnearble endpoint            │
+│ 6  │ SSRF attacks on a Non-Vulnerable endpoint                  │
 ├────┼────────────────────────────────────────────────────────────┤
-│ 7  │ Credential stuffing attack                                 │
+│ 7  │ Successful SSRF attack on a Vulnerable endpoint            │
+├────┼────────────────────────────────────────────────────────────┤
+│ 8  │ Credential stuffing attack                                 │
+├────┼────────────────────────────────────────────────────────────┤
+│ 9  │ Spam campaign                                              │
 └────┴────────────────────────────────────────────────────────────┘
 ```
 
