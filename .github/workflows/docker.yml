@@ -1,13 +1,9 @@
 name: Release docker images
 
-#on:
-  #push:
+on:
+  push:
     # tags:
     #   - "*"
-
-on:
-  pull_request: # for testing
-    types: [opened, reopened]
 
 env:
   REGISTRY: ghcr.io
