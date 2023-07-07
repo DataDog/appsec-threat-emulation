@@ -16,15 +16,13 @@ services:
       - DD_ENV=threat-emulation-local
     
   juiceshop:
-    build:
-      context: apps/Juiceshop
-      dockerfile: Dockerfile
+    image: ghcr.io/datadog/juice-shop
     environment:
       - DD_AGENT_HOST=agent
       - DD_TRACE_AGENT_PORT=8126
       - DD_TRACER_ENABLED=true
       - DD_APPSEC_ENABLED=true
-      - DD_SERVICE=${DD_SERVICE:-asm}
+      - DD_SERVICE=${DD_SERVICE:-ASM-threat-emulation}
       - DD_TRACE_DEBUG=true
     depends_on:
       db:
@@ -33,7 +31,6 @@ services:
         condition: service_healthy
     ports:
        - 8081:3000
-
   db:
     image: mysql
     # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
@@ -49,7 +46,12 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 2s
       retries: 10
-
+  cli:
+    build:
+      context: cli
+      dockerfile: Dockerfile
+    tty: true
+    container_name: asm-threat-emulation
 networks:
   default:
     name: asm-threat-emulation-network

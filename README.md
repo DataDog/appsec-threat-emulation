@@ -29,31 +29,23 @@ Key features of the Threat Emulation Project:
 ## Disclaimers
 This repository contains deliberately insecure web application. Do not deploy it in any production environment.
 
-## Installation
+## Getting started
 
-To install the Threat Emulation Project and set up the environment, follow these steps:
+1. export your Datadog API key 
+```
+export DD_API_KEY="<api-key>"
+```
 
+2. Build and run the necessary containers
+```
+docker compose up  -d
+```
+> the above command will run the `datadog agent`, `juiceshop` vulnerable application, and the tool container
 
-
-1. **Clone the Repository**: with the included sub-module
-
-    ```shell
-    git clone --recurse-submodules git@github.com:DataDog/asm-threat-emulation.git
-    ```
-
-
-2. **Setup & Configuration**: run the setup script to build the docker images and configure the required environment variables
-    ```shell
-    ./setup.sh
-    ```
-
-5. **Run the vulnerable app**: Launch the Threat Emulation Project by running the following command:
-
-   ```shell
-   docker-compose up juiceshop
-   ```
-The application should be accessible via this url `http://localhost:8081`
-
+3. Run the threat emulation tool
+```
+docker exec -it asm-threat-emulation ./cli help
+```
 
 ## Usage
 
@@ -66,7 +58,7 @@ Once the Threat Emulation Project is running and accessible through your web bro
 * List the available attacks
 
 ```
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli list
+docker exec -it asm-threat-emulation ./cli list
 ```
 
 result
@@ -97,13 +89,13 @@ result
 * Running specific attack
 
 ```
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a <attack ID>
+docker exec -it asm-threat-emulation ./cli run -a <attack ID>
 ```
 
 Example
 
 ```
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 5
+docker exec -it asm-threat-emulation ./cli run -a 5
 ```
 
 Result
@@ -122,7 +114,7 @@ The Threat Emulation Project supports a wide range of attacks commonly found in 
 - SSRF attack
 - Credential stuffing attack
 
-Each attack is documented with step-by-step instructions, explanations of the underlying vulnerabilities, and suggested mitigation techniques.
+Each attack is documented with [step-by-step instructions](./docs/), explanations of the underlying vulnerabilities, and suggested mitigation techniques.
 
 ## Contributing
 
@@ -131,4 +123,3 @@ At the time, the repository is not accepting contributions. However, if you'd li
 ## License
 
 TBD
-

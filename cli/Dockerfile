@@ -17,5 +17,5 @@ COPY . .
 
 RUN chmod +x ./cli
 
-ENTRYPOINT [ "./cli" ]
-CMD [ "help" ]
+# ENTRYPOINT [ "./cli" ]
+# CMD ["sleep", "infinity"]
