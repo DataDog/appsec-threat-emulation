@@ -1,7 +1,7 @@
-const axios = require('axios')
-// const { client, v1 } = require('@datadog/datadog-api-client');
+// Unless explicitly stated otherwise all files in this repository are licensed under the Apache 2.0 License.
+// This product includes software developed at Datadog (https://www.datadoghq.com/) Copyright 2023 Datadog, Inc.
 
-// "_dd.appsec.json": "{\"triggers\":[{\"rule\":{\"id\":\"crs-942-100\",\"name\":\"SQL Injection Attack Detected via libinjection\",\"tags\":{\"type\":\"sql_injection\",\"category\":\"attack_attempt\"}},\"rule_matches\":[{\"operator\":\"is_sqli\",\"operator_value\":\"\",\"parameters\":[{\"address\":\"server.request.body\",\"key_path\":[\"email\"],\"value\":\"' or 1=1--\",\"highlight\":[\"s&1c\"]}]}]}]}",
+const axios = require('axios')
 
 const http = (bearer) => {
 
