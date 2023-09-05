@@ -34,16 +34,12 @@ docker-compose build juiceshop
 echo "Building the threat cli tool"
 
 cd cli
-docker build -t asm/threat-cli .
+docker build -t appsec/threat-cli .
 cd ..
-
-
-
-
 
 echo 'Done, you can now run docker-compose up juiceshop.'
 echo "docker-compose up juiceshop"
-echo 'And you can use the asm/threat-cli to test various kind of threats'
+echo 'And you can use the appsec/threat-cli to test various kind of threats'
 echo "Examples:"
-echo "docker run --rm -t --network asm-threat-emulation-network asm/threat-cli list"
-echo "docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 1"
+echo "docker run --rm -t --network appsec-threat-emulation-network appsec/threat-cli list"
+echo "docker run --rm -t --network appsec-threat-emulation-network appsec/threat-cli run -a 1"

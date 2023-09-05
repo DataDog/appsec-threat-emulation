@@ -17,7 +17,7 @@ The first scenario is [an attack on a non-vulnerable endpoint](#1-ssrf-attacks-o
 ## 1. SSRF attacks on a Non-Vulnerable endpoint
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 6
+docker run --rm -t --network appsec-threat-emulation-network asm/threat-cli run -a 6
 ```
 
 This command will run the CLI inside the docker container. The CLI will launch attacks from this [file](./../cli/attacks/ssrf-payloads.txt) on a non-vulnerable endpoint.
@@ -47,7 +47,7 @@ Beacuse of that ASM knows not to generate a signal and not divert your attention
 ## 2. SSRF attacks on a Vulnerable endpoint
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 7
+docker run --rm -t --network appsec-threat-emulation-network asm/threat-cli run -a 7
 ```
 
 This time the attack will execute a working exploit on a vulnerable endpoint. This simulates a successful exploitation of a real vulnerability.

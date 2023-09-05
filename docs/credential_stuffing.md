@@ -7,7 +7,7 @@ Credential Stuffing attacks are a very popular attack against authentication sys
 You can run the attacks using our cli tool
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 8
+docker run --rm -t --network appsec-threat-emulation-network asm/threat-cli run -a 8
 ```
 
 This command will run the cli inside the docker container. The CLI will launch attacks from this [file](./../cli/attacks/generic-payloads.txt) on the vulnerable application.

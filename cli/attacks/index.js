@@ -20,7 +20,8 @@ const attackList = [
     {id: 6, description: "SSRF attacks on " + bold("a Non-Vulnerable") + " endpoint", attackFunc: ssrf.basic1},
     {id: 7, description: "Successful SSRF attack on " + bold("a Vulnerable") + " endpoint",  attackFunc: ssrf.exploit},
     {id: 8, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing},
-    {id: 9, description: "Spam campaign", attackFunc: rate_limit.spam}
+    {id: 9, description: "Bruteforce attack", attackFunc: auth.bruteforce},
+    {id: 10, description: "Spam campaign", attackFunc: rate_limit.spam}
 ];
 
 module.exports = {
