@@ -118,7 +118,8 @@ Each attack is documented with [step-by-step instructions](./docs/), explanation
 
 ## Contributing
 
-At the time, the repository is not accepting contributions. However, if you'd like to share an interesting attack or threat with us, reach out at securitylabs@datadoghq.com!
+We're open to contributions.  
+If you're looking to introduce new threats to the repo, please reach out at securitylabs@datadoghq.com so that we can move forward faster!
 
 ## License
 
