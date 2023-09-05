@@ -17,7 +17,7 @@ The first scenario is [an attack on a non-vulnerable endpoint](#1-sql-injection-
 ## 1. SQL injection attacks on a Non-Vulnerable endpoint
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 4
+docker run --rm -t --network appsec-threat-emulation-network asm/threat-cli run -a 4
 ```
 
 This command will run the CLI inside the docker container. The CLI will launch attacks from this [file](./../cli/attacks/sqli-payloads.txt) on a non-vulnerable endpoint.  
@@ -46,7 +46,7 @@ A SQL injection signal will be generated with severity medium. You can review th
 ## 2. SQL injection attacks on a Vulnerable endpoint
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 5
+docker run --rm -t --network appsec-threat-emulation-network asm/threat-cli run -a 5
 ```
 
 This time the attack will execute a working exploit on a vulnerable endpoint. This simulates a successful exploitation of a real vulnerability.

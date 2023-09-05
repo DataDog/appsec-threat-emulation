@@ -7,7 +7,7 @@ Security scanning is one of the first major steps in any hackers methdology to f
 You can run the scan using our cli tool
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 2
+docker run --rm -t --network appsec-threat-emulation-network asm/threat-cli run -a 2
 ```
 
 This command will run the CLI inside the docker container. The CLI will launch attacks from this [file](./../cli/attacks/fuzzing.txt) on the vulnerable application.

@@ -9,7 +9,7 @@ In our exemple, we have the case of log4shell exploits sent to Node.js applicati
 You can run the scan using our cli tool
 
 ```shell
-docker run --rm -t --network asm-threat-emulation-network asm/threat-cli run -a 3
+docker run --rm -t --network appsec-threat-emulation-network asm/threat-cli run -a 3
 ```
 
 This command will run the CLI inside the docker container. The CLI will launch an attack using a log4shell payload on the vulnerable application.

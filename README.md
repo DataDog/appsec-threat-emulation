@@ -44,7 +44,7 @@ docker compose up  -d
 
 3. Run the threat emulation tool
 ```
-docker exec -it asm-threat-emulation ./cli help
+docker exec -it appsec-threat-emulation ./cli help
 ```
 
 ## Usage
@@ -58,7 +58,7 @@ Once the Threat Emulation Project is running and accessible through your web bro
 * List the available attacks
 
 ```
-docker exec -it asm-threat-emulation ./cli list
+docker exec -it appsec-threat-emulation ./cli list
 ```
 
 result
@@ -89,13 +89,13 @@ result
 * Running specific attack
 
 ```
-docker exec -it asm-threat-emulation ./cli run -a <attack ID>
+docker exec -it appsec-threat-emulation ./cli run -a <attack ID>
 ```
 
 Example
 
 ```
-docker exec -it asm-threat-emulation ./cli run -a 5
+docker exec -it appsec-threat-emulation ./cli run -a 5
 ```
 
 Result
@@ -118,7 +118,8 @@ Each attack is documented with [step-by-step instructions](./docs/), explanation
 
 ## Contributing
 
-At the time, the repository is not accepting contributions. However, if you'd like to share an interesting attack or threat with us, reach out at securitylabs@datadoghq.com!
+We're open to contributions.  
+If you're looking to introduce new threats to the repo, please reach out at securitylabs@datadoghq.com so that we can move forward faster!
 
 ## License
 
