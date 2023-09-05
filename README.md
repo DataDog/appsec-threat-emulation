@@ -123,4 +123,4 @@ If you're looking to introduce new threats to the repo, please reach out at secu
 
 ## License
 
-TBD
+Apache 2.0
