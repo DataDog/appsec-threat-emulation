@@ -34,7 +34,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.2.0
         with:
-          context: .
+          context: ./cli
           push: true
           build-args: |
             VERSION=${{ github.ref_name }}
