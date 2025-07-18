@@ -94,3 +94,5 @@ services:
 networks:
   default:
     name: appsec-threat-emulation-network
+    external: true
+
