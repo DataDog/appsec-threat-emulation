@@ -1,29 +1,68 @@
 version: "3.9"
 services:
   agent:
-    image: datadog/agent:latest
-    ports:
-      - "8126:8126"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    image: "gcr.io/datadoghq/agent:latest"
+    pid: host
+    security_opt:
+      - apparmor:unconfined
+    cap_add:
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+      - IPC_LOCK
+      - CHOWN
     environment:
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_SITE=datadoghq.com
+      - DD_ENV=prod
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
-      - DD_API_KEY=${DD_API_KEY}
-      - DD_SITE=${DD_SITE:-datadoghq.com}
-      - DD_ENV=threat-emulation-local
+      - DD_LOGS_ENABLED=true
+      - DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED=true
+      - DD_REMOTE_CONFIGURATION_ENABLED=true
+      # Sec
+      - DD_COMPLIANCE_CONFIG_ENABLED=true
+      - DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED=true
+      - DD_IAST_ENABLED=true
+      - DD_APPSEC_ENABLED=true
+      - DD_SBOM_ENABLED=true
+      - DD_CONTAINER_IMAGE_ENABLED=true
+      - DD_SBOM_CONTAINER_IMAGE_ENABLED=true
+      # Workload Sec
+      - DD_RUNTIME_SECURITY_CONFIG_ENABLED=true
+      - DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true
+      - DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true
+      - DD_RUNTIME_SECURITY_CONFIG_SECURITY_PROFILE_AUTO_SUPPRESSION_ENABLED=false
+      - DD_RUNTIME_SECURITY_CONFIG_ACTIVITY_DUMP_AUTO_SUPPRESSION_ENABLED=false
+      - HOST_ROOT=/host/root
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock:ro 
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+      - /:/host/root:ro
+      - /sys/kernel/debug:/sys/kernel/debug
+      - /etc/os-release:/etc/os-release
+
     
   juiceshop:
-    image: ghcr.io/datadog/juice-shop
+    image: mdorn/juice-shop-dd
     environment:
       - DD_AGENT_HOST=agent
       - DD_TRACE_AGENT_PORT=8126
       - DD_TRACER_ENABLED=true
-      - DD_APPSEC_ENABLED=true
       - DD_SERVICE=${DD_SERVICE:-appsec-threat-emulation}
       - DD_TRACE_DEBUG=true
+      - DD_LOGS_INJECTION=true
+      - DD_APPSEC_ENABLED=true
+      - DD_IAST_ENABLED=true
+      - DD_APPSEC_SCA_ENABLED=true
+
     depends_on:
       db:
         condition: service_healthy
