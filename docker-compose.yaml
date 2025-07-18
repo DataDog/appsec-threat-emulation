@@ -16,9 +16,8 @@ services:
       - CHOWN
     environment:
       - DD_API_KEY=${DD_API_KEY}
-      - DD_SITE=datadoghq.com
-      - DD_ENV=prod
-      - DD_APM_ENABLED=true
+      - DD_SITE=${DD_SITE:-datadoghq.com}
+      - DD_ENV=${DD_ENV:-threat-emulation-local}
       - DD_APM_NON_LOCAL_TRAFFIC=true
       - DD_LOGS_ENABLED=true
       - DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED=true
