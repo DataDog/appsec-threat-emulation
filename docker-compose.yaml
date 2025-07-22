@@ -20,6 +20,7 @@ services:
       - DD_ENV=${DD_ENV:-threat-emulation-local}
       - DD_APM_NON_LOCAL_TRAFFIC=true
       - DD_LOGS_ENABLED=true
+      - DD_APM_ENABLED=true
       - DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED=true
       - DD_REMOTE_CONFIGURATION_ENABLED=true
       # Sec
@@ -94,5 +95,5 @@ services:
 networks:
   default:
     name: appsec-threat-emulation-network
-    external: true
+    # external: true
 
