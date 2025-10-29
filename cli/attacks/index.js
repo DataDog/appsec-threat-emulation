@@ -7,6 +7,7 @@ const sqli = require('./sqli');
 const auth = require('./auth');
 const ssrf = require('./ssrf');
 const rate_limit = require('./rate_limiting');
+const signup = require('./signup');
 
 let baseUrl = "http://juiceshop:3000"
 
@@ -21,22 +22,23 @@ const attackList = [
     {id: 7, description: "Successful SSRF attack on " + bold("a Vulnerable") + " endpoint",  attackFunc: ssrf.exploit},
     {id: 8, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing},
     {id: 9, description: "Bruteforce attack", attackFunc: auth.bruteforce},
-    {id: 10, description: "Spam campaign", attackFunc: rate_limit.spam}
+    {id: 10, description: "Spam campaign", attackFunc: rate_limit.spam},
+    {id: 11, description: "Multiple signups", attackFunc:signup.signups },
 ];
 
 module.exports = {
     getList: () => {
         return attackList;
     },
-    run: async (id, targetURL) => {
+    run: async (id, targetURL, headers) => {
         if(!targetURL){
             targetURL = baseUrl;
         }
         for (const attack of attackList) {
             if(id == attack.id){
-                console.log(chalk.yellow('Running attack #'+id + ': '), attack.description)
-                console.log(chalk.yellow('Target URL: '), targetURL)
-                await attack.attackFunc(targetURL);
+                console.log(chalk.yellow('Running attack #'+id + ': '), attack.description);
+                console.log(chalk.yellow('Target URL: '), targetURL);
+                await attack.attackFunc(targetURL, headers);
             }
         }
     }
