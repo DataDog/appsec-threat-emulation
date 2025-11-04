@@ -4,13 +4,13 @@ const { faker } = require('@faker-js/faker');
 const { http } = require('../lib/request');
 
 
-const threshold = 100;
+const threshold = 11;
 
 async function signups(targetURL, headers){
 
     const spinner = ora('Starting user signups...').start();
     
-    for (let i = 0; i < 11; i++) {
+    for (let i = 0; i < threshold; i++) {
         let info =  {
             email: faker.internet.email() ,
             password: faker.internet.password(),
@@ -32,13 +32,13 @@ async function signups(targetURL, headers){
                 "securityAnswer":"bla"
             }
         );        
-        spinner.text = 'Signing up: ' + (i+1).toString() + ' / 11';
+        spinner.text = 'Signing up: ' + (i+1).toString() + ` / ${threshold}`;
         await new Promise(r => setTimeout(r, 100));
     }
 
     spinner.stopAndPersist({
                     symbol: logSymbols.success,
-                    text: 'User signups: 11 accounts created',
+                    text: `User signups: ${threshold} accounts created`,
                 });
    
 }
