@@ -3,7 +3,7 @@
 
 const axios = require('axios')
 
-const http = (bearer) => {
+const http = (bearer='', headers={}) => {
 
     // 'headers':
     //         {
@@ -17,7 +17,7 @@ const http = (bearer) => {
             try {
                 res = await axios.get(url, {
                     params: params,
-                    headers: { 'User-Agent': id, 'Cookie': "token=" + bearer, 'Authorization': "Bearer " + bearer },
+                    headers: Object.assign(headers, { 'User-Agent': id, 'Cookie': "token=" + bearer, 'Authorization': "Bearer " + bearer }),
                     withCredentials: true
                 }) 
             } catch (error) { 
@@ -29,7 +29,7 @@ const http = (bearer) => {
             let res = false;
             try {
                 res = await axios.post(url, data, {
-                    headers: { 'User-Agent': id, 'Cookie': "token=" + bearer, 'Authorization': "Bearer " + bearer, 'Content-Type': contentType },
+                    headers: Object.assign(headers, { 'User-Agent': id, 'Cookie': "token=" + bearer, 'Authorization': "Bearer " + bearer, 'Content-Type': contentType }),
                     withCredentials: true
                 }) 
             } catch (error) { 
@@ -41,12 +41,12 @@ const http = (bearer) => {
             let res = false;
             try {
                 res = await axios.patch(url, data, {
-                    headers: { 
+                    headers: Object.assign(headers, { 
                         'User-Agent': id,
                         'Content-Type': contentType,
                         'Cookie': "token=" + bearer,
                         'Authorization': "Bearer " + bearer
-                    },
+                    }),
                     withCredentials: true
                 })
             } catch (error) { return error }
@@ -56,12 +56,12 @@ const http = (bearer) => {
             let res = false;
             try {
                 res = await axios.put(url, data, {
-                    headers: { 
+                    headers: Object.assign(headers, { 
                         'User-Agent': id,
                         'Content-Type': contentType,
                         'Cookie': "token=" + bearer,
                         'Authorization': "Bearer " + bearer
-                    },
+                    }),
                     withCredentials: true
                 })
             } catch (error) { return error }

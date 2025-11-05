@@ -28,12 +28,23 @@ program.command('run')
     // .argument('[attackID]', 'run specific attack')
     .requiredOption('-a, --attack <attack_id>', 'Attack ID you want to detonate, Use all to run all attacks')
     // .option('--target', 'the target url, default is http://localhost:8081')
-    .option('-t, --target <type>', 'the target url, default is configured to use docker hosts http://juiceshop/')
+    .option('-t, --target <target>', 'the target url, default is configured to use docker hosts http://juiceshop/')
+    .option('-h, --headers <headers>', 'Additional HTTP headers, comma-delimited e.g. X-Forwarded-For=1.2.3.4,foo=bar, optional')
     .action((options) => {
         // if(options.attack == 'all'){
         //     return attacks.runAll(options.target);
         // }
-        attacks.run(options.attack, options.target)
+        const headersObj = {};        
+        if (options.headers) {
+            const headersArray = options.headers.split(',');
+            for (i in headersArray) {
+                let iArr = headersArray[i].split('=');
+                let iKey = iArr[0];
+                let iVal = iArr[1];
+                headersObj[iKey] = iVal;
+            }
+        }
+        attacks.run(options.attack, options.target, headersObj)
     });
 
 program.parse();
