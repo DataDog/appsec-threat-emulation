@@ -89,6 +89,9 @@ async function bruteforce(targetURL){
             data : {
                 "email": "bla@bla.com" ,
                 "password": "notblabla"
+            },
+            headers: {
+                'X-Forwarded-For': '1.2.3.4'
             }
         };
         spinner.text = 'Attempting login with incorrect password';

