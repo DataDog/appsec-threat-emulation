@@ -8,6 +8,7 @@ const auth = require('./auth');
 const ssrf = require('./ssrf');
 const rate_limit = require('./rate_limiting');
 const signup = require('./signup');
+const rce = require('./rce');
 
 let baseUrl = "http://juiceshop:3000"
 
@@ -23,7 +24,8 @@ const attackList = [
     {id: 8, description: "Credential stuffing attack", attackFunc: auth.credentialStuffing},
     {id: 9, description: "Bruteforce attack", attackFunc: auth.bruteforce},
     {id: 10, description: "Spam campaign", attackFunc: rate_limit.spam},
-    {id: 11, description: "Multiple signups", attackFunc:signup.signups },
+    {id: 11, description: "Multiple signups", attackFunc:signup.signups},
+    {id: 12, description: "Remote code injection", attackFunc:rce.ssti},
 ];
 
 module.exports = {

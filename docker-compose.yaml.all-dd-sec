@@ -63,6 +63,7 @@ services:
       - DD_APPSEC_ENABLED=true
       - DD_IAST_ENABLED=true
       - DD_APPSEC_SCA_ENABLED=true
+      - NODE_ENV=unsafe
 
     depends_on:
       db:
