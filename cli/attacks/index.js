@@ -25,7 +25,7 @@ const attackList = [
     {id: 9, description: "Bruteforce attack", attackFunc: auth.bruteforce},
     {id: 10, description: "Spam campaign", attackFunc: rate_limit.spam},
     {id: 11, description: "Multiple signups", attackFunc:signup.signups},
-    {id: 12, description: "Remote code injection", attackFunc:rce.ssti},
+    {id: 12, description: "Remote code execution", attackFunc:rce.ssti},
 ];
 
 module.exports = {

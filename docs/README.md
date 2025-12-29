@@ -8,3 +8,4 @@
 7. [Successful SSRF attack on a vulnerable endpoint](./server_side_request_forgery.md#2-ssrf-attacks-on-a-vulnerable-endpoint)
 8. [Credential Stuffing attack](./credential_stuffing.md)
 9. [Spam campaign triggering rate limiting feature](./rate_limiting.md)
+10. [Remote Code Execution via Server-Side Template Injection](./remote_code_execution.md)
