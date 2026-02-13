@@ -12,7 +12,7 @@
     "axios": "^1.4.0",
     "chalk": "^4.1.2",
     "cli-table": "^0.3.11",
-    "commander": "^10.0.1",
+    "commander": "^14.0.3",
     "log-symbols": "^4.1.0",
     "ora": "^5.4.1"
   }
