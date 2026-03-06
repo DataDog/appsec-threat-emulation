@@ -8,8 +8,8 @@
   },
   "author": "",
   "dependencies": {
-    "@faker-js/faker": "^8.0.1",
-    "axios": "^1.4.0",
+    "@faker-js/faker": "^8.0.2",
+    "axios": "^1.13.5",
     "chalk": "^4.1.2",
     "cli-table": "^0.3.11",
     "commander": "^10.0.1",
