@@ -24,6 +24,7 @@ services:
       - DD_APPSEC_ENABLED=true
       - DD_SERVICE=${DD_SERVICE:-appsec-threat-emulation}
       - DD_TRACE_DEBUG=true
+      - NODE_ENV=unsafe
     depends_on:
       db:
         condition: service_healthy
