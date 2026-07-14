@@ -1,0 +1,29 @@
+{
+  "_comment": "Starter Datadog App and API Protection (trace-based) custom detection rule for the distributed scraping emulated by attack #12. Import/adapt via the Security Monitoring API (POST /api/v2/security_monitoring/rules) or recreate it in Security > App and API Protection > Detection Rules. Tune thresholds/windows to your environment.",
+  "name": "Distributed catalog scraping (bot signals)",
+  "type": "application_security",
+  "isEnabled": true,
+  "message": "Distributed scraping detected against {{service}}: traffic from datacenter ASNs exhibiting recon probing, high request rate, and/or same-ASN IP clustering. Source ASN {{@network.client.asn}} / IP {{@http.client_ip}}. See docs/scraping.md.",
+  "tags": ["attack:scraping", "source:appsec-threat-emulation", "owasp:business-logic-abuse"],
+  "queries": [
+    {
+      "name": "scraping_signals",
+      "query": "service:appsec-threat-emulation (@appsec.events.business_logic.scraping.track:true OR (@bot.signal.datacenter_ip:true AND (@bot.signal.asn_cluster:true OR @bot.signal.high_request_rate:true)))",
+      "groupByFields": ["@network.client.asn"],
+      "aggregation": "count",
+      "distinctFields": ["@http.client_ip"]
+    }
+  ],
+  "cases": [
+    {
+      "name": "distributed_scraper",
+      "status": "high",
+      "condition": "scraping_signals > 10"
+    }
+  ],
+  "options": {
+    "evaluationWindow": 300,
+    "keepAlive": 600,
+    "maxSignalDuration": 900
+  }
+}

@@ -2,3 +2,7 @@ untracked
 docker
 .env
 # jest-report
+
+# tracing preload deps + downloaded ASN database (fetch with tracing/fetch-asn-db.sh)
+tracing/node_modules/
+tracing/data/*.mmdb

@@ -113,6 +113,7 @@ The Threat Emulation Project supports a wide range of attacks commonly found in 
 - SQL Injection attacks 
 - SSRF attack
 - Credential stuffing attack
+- Distributed catalog scraping / bot traffic (see [docs/scraping.md](./docs/scraping.md))
 
 Each attack is documented with [step-by-step instructions](./docs/), explanations of the underlying vulnerabilities, and suggested mitigation techniques.
 

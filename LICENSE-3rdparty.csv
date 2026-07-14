@@ -1,2 +1,6 @@
 "Component","origin","license","copyright"
 "Juice-Shop","https://github.com/Datadog/juice-shop","MIT","Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors"
+"maxmind","https://github.com/runk/node-maxmind","MIT","Copyright (c) Dmitry Shirokov"
+"mmdb-lib","https://github.com/runk/mmdb-lib","MIT","Copyright (c) Dmitry Shirokov"
+"tiny-lru","https://github.com/avoidwork/tiny-lru","BSD-3-Clause","Copyright (c) Jason Mulligan"
+"IP to ASN Lite database","https://db-ip.com/db/download/ip-to-asn-lite","CC-BY-4.0","Copyright (c) DB-IP"
