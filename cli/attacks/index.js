@@ -8,6 +8,7 @@ const auth = require('./auth');
 const ssrf = require('./ssrf');
 const rate_limit = require('./rate_limiting');
 const signup = require('./signup');
+const scraping = require('./scraping');
 
 let baseUrl = "http://juiceshop:3000"
 
@@ -24,6 +25,7 @@ const attackList = [
     {id: 9, description: "Bruteforce attack", attackFunc: auth.bruteforce},
     {id: 10, description: "Spam campaign", attackFunc: rate_limit.spam},
     {id: 11, description: "Multiple signups", attackFunc:signup.signups },
+    {id: 12, description: "Distributed catalog scraping from rotating sources", attackFunc: scraping.distributedScrape },
 ];
 
 module.exports = {

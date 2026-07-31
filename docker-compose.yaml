@@ -1,29 +1,36 @@
-version: "3.9"
 services:
   agent:
     image: datadog/agent:latest
     ports:
       - "8126:8126"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
     environment:
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
       - DD_API_KEY=${DD_API_KEY}
       - DD_SITE=${DD_SITE:-datadoghq.com}
       - DD_ENV=threat-emulation-local
-    
+      # Rootless podman/docker-in-a-VM can't auto-detect a hostname
+      # (no access to /host/proc or the container socket), which makes the
+      # core agent exit on startup and report "unhealthy". Pin it explicitly.
+      - DD_HOSTNAME=threat-emulation-local
+
   juiceshop:
     image: ghcr.io/datadog/juice-shop
+    volumes:
+      # Preload that tags inbound request spans with bot/scraper giveaway signals.
+      - ./tracing:/dd-tracing:ro
     environment:
       - DD_AGENT_HOST=agent
       - DD_TRACE_AGENT_PORT=8126
       - DD_TRACER_ENABLED=true
       - DD_APPSEC_ENABLED=true
+      - DD_ENV=threat-emulation-local
       - DD_SERVICE=${DD_SERVICE:-appsec-threat-emulation}
       - DD_TRACE_DEBUG=true
+      # Surface the real client IP (from X-Forwarded-For) on spans for detection.
+      - DD_TRACE_CLIENT_IP_ENABLED=true
+      # Inject the bot-signal span tagger into the app process.
+      - NODE_OPTIONS=--require /dd-tracing/bot-signals.js
     depends_on:
       db:
         condition: service_healthy

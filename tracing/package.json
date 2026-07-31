@@ -1,0 +1,10 @@
+{
+  "name": "appsec-threat-emulation-tracing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "dd-trace preload that tags inbound request spans with bot/scraper giveaway signals for the Juice Shop target.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "maxmind": "^5.0.6"
+  }
+}

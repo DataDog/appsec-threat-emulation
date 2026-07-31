@@ -37,6 +37,12 @@ cd cli
 docker build -t appsec/threat-cli .
 cd ..
 
+echo "Installing tracing preload dependencies (maxmind, for ASN lookups)"
+( cd tracing && npm install ) || echo "  npm install in tracing/ failed; bot-signal ASN lookups will use the built-in fallback table."
+
+echo "Fetching a MaxMind-style IP->ASN database for bot/scraper detection (optional)"
+./tracing/fetch-asn-db.sh || echo "  ASN DB download skipped; bot-signals.js will use its built-in /16 fallback table."
+
 echo 'Done, you can now run docker-compose up juiceshop.'
 echo "docker-compose up juiceshop"
 echo 'And you can use the appsec/threat-cli to test various kind of threats'

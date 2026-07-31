@@ -1,0 +1,89 @@
+{
+  "_comment": "Rev 2 starter detection rules for the distributed scraping / bot traffic from attack #12. Four complementary rules: (A) aggressive single IP with auto-block, (B) distributed same-ASN cluster grouped into one signal per ASN, (C) no-conversion behavioral scraper, (D) anonymized-infrastructure source via threat intelligence. Adapt in Security > App and API Protection > Detection Rules, or POST to /api/v2/security_monitoring/rules. Tune thresholds/windows to your environment. Replace service:appsec-threat-emulation with your service.",
+  "rules": [
+    {
+      "name": "Scraping - aggressive single source (Rule A)",
+      "type": "application_security",
+      "isEnabled": true,
+      "message": "High-volume scraping from a single IP against {{service}}. Source {{@http.client_ip}} (AS{{@network.client.asn}} / {{@network.client.asn_org}}).",
+      "tags": ["attack:scraping", "source:appsec-threat-emulation"],
+      "queries": [
+        {
+          "name": "hits",
+          "query": "@appsec.security_activity:business_logic.business_logic.scraping service:appsec-threat-emulation @bot.score:>=3",
+          "groupByFields": ["@http.client_ip"],
+          "aggregation": "count"
+        }
+      ],
+      "cases": [
+        { "name": "critical_volume", "status": "critical", "condition": "hits > 300" },
+        { "name": "high_volume", "status": "high", "condition": "hits > 100" },
+        { "name": "medium_volume", "status": "medium", "condition": "hits > 30" }
+      ],
+      "options": { "evaluationWindow": 300, "keepAlive": 600, "maxSignalDuration": 900 },
+      "response": "On high/critical, Block IP (@http.client_ip) for a fixed duration via In-App WAF."
+    },
+    {
+      "name": "Scraping - distributed same-ASN cluster (Rule B)",
+      "type": "application_security",
+      "isEnabled": true,
+      "message": "Distributed scraping from {{@network.client.asn_org}} (AS{{@network.client.asn}}) against {{service}}: many distinct IPs from one network.",
+      "tags": ["attack:scraping", "source:appsec-threat-emulation", "pattern:distributed"],
+      "queries": [
+        {
+          "name": "distinct_ips",
+          "query": "@appsec.security_activity:business_logic.business_logic.scraping service:appsec-threat-emulation @bot.signal.datacenter_ip:true",
+          "groupByFields": ["@network.client.asn"],
+          "aggregation": "cardinality",
+          "distinctFields": ["@http.client_ip"]
+        }
+      ],
+      "cases": [
+        { "name": "distributed", "status": "high", "condition": "distinct_ips > 10" }
+      ],
+      "options": { "evaluationWindow": 300, "keepAlive": 600, "maxSignalDuration": 900 },
+      "signalGrouping": "Generate one signal per @network.client.asn so member IPs roll into a single signal.",
+      "response": "Block the member @http.client_ip values. AAP blocks by IP, not ASN. Consider notify-first to avoid blocking a shared cloud network."
+    },
+    {
+      "name": "Scraping - reads catalog, never converts (Rule C)",
+      "type": "application_security",
+      "isEnabled": true,
+      "message": "No-conversion scraping against {{service}}: source viewed many catalog pages with no purchase intent. Source {{@http.client_ip}}.",
+      "tags": ["attack:scraping", "source:appsec-threat-emulation", "pattern:no-conversion"],
+      "queries": [
+        {
+          "name": "no_conversion_sources",
+          "query": "@appsec.security_activity:business_logic.business_logic.scraping service:appsec-threat-emulation @bot.signal.no_conversion:true",
+          "groupByFields": ["@http.client_ip"],
+          "aggregation": "count"
+        }
+      ],
+      "cases": [
+        { "name": "no_conversion", "status": "medium", "condition": "no_conversion_sources > 0" }
+      ],
+      "options": { "evaluationWindow": 600, "keepAlive": 900, "maxSignalDuration": 1800 },
+      "note": "Catches slow, well-behaved scrapers that stay under rate limits. The bot.signal.no_conversion tag is precomputed by the target instrumentation (many catalog views, zero basket/order requests)."
+    },
+    {
+      "name": "Scraping - anonymized infrastructure source (Rule D)",
+      "type": "application_security",
+      "isEnabled": true,
+      "message": "Scraping from anonymized infrastructure against {{service}}: source rides residential-proxy / Tor / scanner networks. Source {{@http.client_ip}}.",
+      "tags": ["attack:scraping", "source:appsec-threat-emulation", "pattern:anon-infra"],
+      "queries": [
+        {
+          "name": "anon_infra",
+          "query": "service:appsec-threat-emulation (@threat_intel.results.category:(residential_proxy OR tor OR corp_vpn OR scanner) OR @bot.signal.anon_proxy:true)",
+          "groupByFields": ["@http.client_ip"],
+          "aggregation": "count"
+        }
+      ],
+      "cases": [
+        { "name": "anon_infra_source", "status": "high", "condition": "anon_infra > 10" }
+      ],
+      "options": { "evaluationWindow": 300, "keepAlive": 600, "maxSignalDuration": 900 },
+      "note": "In production, @threat_intel.results.category is supplied automatically by Datadog Threat Intelligence. @bot.signal.anon_proxy is the lab stand-in emitted by the demo instrumentation. This rule catches proxy-based scrapers that the datacenter-IP signal (Rule A/B) misses."
+    }
+  ]
+}
