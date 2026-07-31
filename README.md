@@ -113,13 +113,22 @@ Target URL:  http://juiceshop:3000
 
 ## Supported Attacks
 
-The Threat Emulation Project supports a wide range of attacks commonly found in web application security assessments. Some of the supported attacks include:
+The Threat Emulation Project supports a wide range of attacks commonly found in web application security assessments. All 12 supported attacks:
 
-- General attacks (Security Scanners)
-- SQL Injection attacks 
-- SSRF attack
-- Credential stuffing attack
-- Distributed catalog scraping / bot traffic (see [docs/scraping.md](./docs/scraping.md))
+| ID | Attack name | Docs |
+| --- | --- | --- |
+| 1 | Security scan using known attack tools | [known_attack_tools.md](./docs/known_attack_tools.md) |
+| 2 | Generic security scan | [generic_security_scan.md](./docs/generic_security_scan.md) |
+| 3 | Log4Shell attack on a Non-Vulnerable application | [log4shell.md](./docs/log4shell.md) |
+| 4 | SQL injection attacks on a Non-Vulnerable endpoint | [sql_injection.md](./docs/sql_injection.md) |
+| 5 | Successful SQL injection attack on a Vulnerable endpoint | [sql_injection.md](./docs/sql_injection.md) |
+| 6 | SSRF attacks on a Non-Vulnerable endpoint | [server_side_request_forgery.md](./docs/server_side_request_forgery.md) |
+| 7 | Successful SSRF attack on a Vulnerable endpoint | [server_side_request_forgery.md](./docs/server_side_request_forgery.md) |
+| 8 | Credential stuffing attack | [credential_stuffing.md](./docs/credential_stuffing.md) |
+| 9 | Bruteforce attack | [credential_stuffing.md](./docs/credential_stuffing.md) |
+| 10 | Spam campaign | [rate_limiting.md](./docs/rate_limiting.md) |
+| 11 | Multiple signups | [excessive_signups.md](./docs/excessive_signups.md) |
+| 12 | Distributed catalog scraping from rotating sources | [scraping.md](./docs/scraping.md) |
 
 Each attack is documented with [step-by-step instructions](./docs/), explanations of the underlying vulnerabilities, and suggested mitigation techniques.
 
