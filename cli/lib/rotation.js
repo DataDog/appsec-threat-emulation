@@ -24,6 +24,17 @@ const DATACENTER_RANGES = [
     { prefix: '34.90',   asn: 396982, org: 'Google Cloud' },
 ];
 
+// Residential-looking source networks flagged as anonymized infrastructure
+// (residential proxy / Tor / scanner). These are not hosting ASNs, so they are
+// the "blind spot" that a datacenter-IP check alone misses. The target-side
+// preload flags them via bot.signal.anon_proxy; in production this is Datadog
+// Threat Intelligence (@threat_intel.results.category).
+const ANON_PROXY_RANGES = [
+    { prefix: '203.0.113',  category: 'residential_proxy' },
+    { prefix: '198.51.100', category: 'tor' },
+    { prefix: '192.0.2',    category: 'scanner' },
+];
+
 // Paths a scraper probes but a human browsing the shop never would.
 const RECON_PATHS = [
     '/robots.txt',
@@ -85,9 +96,25 @@ function clusteredSourceHeaders(range, headers = {}) {
     return forwardHeaders(datacenterIp(range), headers);
 }
 
+// A single fixed IP, for behavior that must come from one source (e.g. a
+// read-only scraper that views many pages and never converts).
+function fixedSourceHeaders(ip, headers = {}) {
+    return forwardHeaders(ip, headers);
+}
+
+// A source drawn from anonymized-infrastructure ranges (residential proxy / Tor
+// / scanner). Not a hosting ASN, so it evades the datacenter-IP check. The
+// prefixes are /24 (three octets), so only the final octet is randomized.
+function anonProxySourceHeaders(headers = {}) {
+    const range = pick(ANON_PROXY_RANGES);
+    const ip = range.prefix + '.' + (randInt(254) + 1);
+    return { headers: forwardHeaders(ip, headers), range };
+}
+
 module.exports = {
     IP_PREFIXES,
     DATACENTER_RANGES,
+    ANON_PROXY_RANGES,
     RECON_PATHS,
     BROWSER_USER_AGENTS,
     randomIp,
@@ -95,4 +122,6 @@ module.exports = {
     spoofedSourceHeaders,
     datacenterSourceHeaders,
     clusteredSourceHeaders,
+    fixedSourceHeaders,
+    anonProxySourceHeaders,
 };

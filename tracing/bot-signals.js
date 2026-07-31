@@ -84,6 +84,19 @@ const DATACENTER_BY_PREFIX = {
     '34.90':   { asn: 396982, org: 'Google Cloud' },
 };
 
+// Lab stand-in for Datadog Threat Intelligence. In production, AAP enriches
+// each request with @threat_intel.results.category (residential_proxy, tor,
+// corp_vpn, scanner) from curated feeds. That enrichment is server-side, so we
+// cannot emit it from the tracer. This table lets attack #12 demonstrate the
+// same detection path against known anonymized-infra sources. These prefixes are
+// deliberately not hosting ASNs, so they show the residential-proxy blind spot
+// that the datacenter-IP signal alone would miss.
+const ANON_PROXY_BY_PREFIX = {
+    '203.0.113':  'residential_proxy',
+    '198.51.100': 'tor',
+    '192.0.2':    'scanner',
+};
+
 const RECON_PATHS = new Set([
     '/robots.txt',
     '/sitemap.xml',
@@ -92,12 +105,18 @@ const RECON_PATHS = new Set([
     '/admin',
 ]);
 
+// Funnel matchers for the "reads a lot, never converts" behavioral signal.
+const CATALOG_VIEW_RE = /^\/(api\/Products|rest\/products)/;
+const CONVERSION_RE = /^\/(api\/BasketItems|api\/Orders|rest\/basket)/;
+
 const RATE_WINDOW_MS = 10000;
-const RATE_THRESHOLD = 15;      // requests / window from one IP
-const CLUSTER_THRESHOLD = 8;    // distinct IPs from one ASN / window
+const RATE_THRESHOLD = 15;              // requests / window from one IP
+const CLUSTER_THRESHOLD = 8;            // distinct IPs from one ASN / window
+const NO_CONVERSION_VIEW_THRESHOLD = 12; // catalog views / window with zero conversion
 
 const ipHits = new Map();       // ip -> timestamps[]
 const asnIps = new Map();       // asn -> Map<ip, lastSeenTs>
+const ipFunnel = new Map();     // ip -> { views: number[], conv: number[] }
 
 function clientIpFrom(req) {
     const xff = req.headers['x-forwarded-for'];
@@ -128,6 +147,23 @@ function lookupAsn(ip) {
     if (parts.length < 2) return null;
     const hit = DATACENTER_BY_PREFIX[parts[0] + '.' + parts[1]];
     return hit ? { asn: hit.asn, org: hit.org, isHosting: true } : null;
+}
+
+function lookupAnonProxy(ip) {
+    const parts = ip.split('.');
+    if (parts.length < 3) return null;
+    const category = ANON_PROXY_BY_PREFIX[parts[0] + '.' + parts[1] + '.' + parts[2]];
+    return category ? { category } : null;
+}
+
+function recordFunnel(ip, path, now) {
+    let f = ipFunnel.get(ip);
+    if (!f) { f = { views: [], conv: [] }; ipFunnel.set(ip, f); }
+    if (CATALOG_VIEW_RE.test(path)) f.views.push(now);
+    else if (CONVERSION_RE.test(path)) f.conv.push(now);
+    while (f.views.length && now - f.views[0] > RATE_WINDOW_MS) f.views.shift();
+    while (f.conv.length && now - f.conv[0] > RATE_WINDOW_MS) f.conv.shift();
+    return { views: f.views.length, conv: f.conv.length };
 }
 
 function recordRate(ip, now) {
@@ -186,10 +222,26 @@ function tagBotSignals(span, req, res) {
             }
         }
 
+        // Anonymized infrastructure (lab stand-in for Datadog Threat Intelligence).
+        const proxy = lookupAnonProxy(ip);
+        if (proxy) {
+            span.setTag('bot.signal.anon_proxy', true);
+            span.setTag('bot.client.anon_proxy_category', proxy.category);
+            score++;
+        }
+
         const rate = recordRate(ip, now);
         span.setTag('bot.client.request_rate', rate);
         if (rate >= RATE_THRESHOLD) {
             span.setTag('bot.signal.high_request_rate', true);
+            score++;
+        }
+
+        // Behavioral: reads many catalog pages, never starts a purchase.
+        const funnel = recordFunnel(ip, path, now);
+        span.setTag('bot.client.catalog_views', funnel.views);
+        if (funnel.views >= NO_CONVERSION_VIEW_THRESHOLD && funnel.conv === 0) {
+            span.setTag('bot.signal.no_conversion', true);
             score++;
         }
 
@@ -199,6 +251,8 @@ function tagBotSignals(span, req, res) {
             tracer.appsec.trackCustomEvent('business_logic.scraping', {
                 'client.ip': String(ip),
                 'client.asn': geo ? String(geo.asn) : 'unknown',
+                'anon_proxy.category': proxy ? String(proxy.category) : 'none',
+                'catalog.views': String(funnel.views),
                 'request.path': String(path),
                 'bot.score': String(score),
             });

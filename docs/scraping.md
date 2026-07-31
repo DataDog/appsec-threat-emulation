@@ -38,7 +38,19 @@ Linode 63949, OVH 16276, Hetzner 24940, AWS 16509, GCP 396982) via
 | `bot.client.request_rate` | requests from this IP in the sliding window |
 | `bot.signal.asn_cluster` (`true`) | many distinct IPs from one ASN seen recently |
 | `bot.client.asn_ip_count` | distinct IPs observed for this ASN in the window |
-| `bot.score` | count of signals that fired (0–4) |
+| `bot.signal.no_conversion` (`true`) / `bot.client.catalog_views` | viewed many catalog pages with zero purchase intent |
+| `bot.signal.anon_proxy` (`true`) / `bot.client.anon_proxy_category` | source rides anonymized infra (residential proxy / Tor / scanner) |
+| `bot.score` | count of signals that fired (0-6) |
+
+The `no_conversion` signal is behavioral. It flags a source that reads many
+catalog pages but never touches the basket or order endpoints, so it catches
+slow scrapers that stay under rate limits. The `anon_proxy` signal is a lab
+stand-in for Datadog Threat Intelligence: in production, AAP supplies
+`@threat_intel.results.category` (residential_proxy, tor, corp_vpn, scanner)
+automatically. These proxy sources are not hosting ASNs, so they show the blind
+spot that the datacenter-IP signal alone would miss. See
+[`detection-rules/scraping-bot-rev2.json`](./detection-rules/scraping-bot-rev2.json)
+for the matching rules (A per-IP, B per-ASN, C no-conversion, D anonymized-infra).
 
 When `bot.score >= 2`, a business-logic AppSec event is also emitted via
 `tracer.appsec.trackCustomEvent('business_logic.scraping', {...})`, which surfaces
